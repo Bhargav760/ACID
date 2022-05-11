@@ -1,0 +1,93 @@
+<%- include("partials/header") -%>
+
+<div class="container mt-5">
+  <h1>Login</h1>
+
+  <div class="row">
+    <div class="col-sm-8">
+      <div class="card">
+        <div class="card-body">
+          <!-- Makes POST request to /login route -->
+          <p><%- error %></p>
+          <form id="loginStudent" action="/login" method="POST">
+            <div class="form-group">
+              <label for="username">PRN</label>
+              <input
+                type="text"
+                class="form-control"
+                name="username"
+                placeholder="Enter PRN"
+              />
+            </div>
+            <div class="form-group">
+              <label for="password">Password</label>
+              <input
+                type="password"
+                class="form-control"
+                name="password"
+                placeholder="Enter Password"
+              />
+              <!-- <p name="type" class="login" style="float: right">
+                Teacher Login
+              </p> -->
+              <input
+                id="student"
+                type="button"
+                value="Teacher Login"
+                class="login"
+                style="float: right"
+                onclick="window.location.href = 'http://localhost:3000/loginT'"
+              />
+            </div>
+            <button type="submit" class="btn btn-dark">Login</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- <script>
+  let flag = false;
+  // const userNameLabel = document.querySelector('label[for="username"]');
+  // const userNameInput = document.querySelector('input[name="username"]');
+  // const changeLabel = document.querySelector(".login");
+  // console.log(userNameInput, userNameLabel, changeLabel);
+
+  // changeLabel.addEventListener("click", function () {
+  //   if (flag) {
+  //     changeLabel.value = "Teacher Login";
+  //     userNameLabel.textContent = "PRN";
+  //     userNameInput.placeholder = "Enter PRN";
+  //     flag = false;
+  //   } else {
+  //     changeLabel.value = "Student Login";
+  //     userNameLabel.textContent = "Email";
+  //     userNameInput.placeholder = "Enter Email";
+  //     flag = true;
+  //   }
+  //   console.log(flag);
+  // });
+
+  // userNameLabel.addEventListener("keyDown", function (event) {
+  //   const key = event.keyCode;
+  //   return (key >= 65 && key <= 90) || key == 8;
+  // });
+
+  document.querySelector("#teacher").addEventListener("click", function () {
+    if (flag) {
+      flag = false;
+      document.querySelector("#loginStudent").classList.toggle("hidden");
+      document.querySelector("#loginTeacher").classList.toggle("hidden");
+    }
+  });
+  document.querySelector("#student").addEventListener("click", function () {
+    if (!flag) {
+      flag = true;
+      document.querySelector("#loginStudent").classList.toggle("hidden");
+      document.querySelector("#loginTeacher").classList.toggle("hidden");
+    }
+  });
+</script> -->
+
+<%- include('partials/footer') %>
