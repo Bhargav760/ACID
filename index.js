@@ -133,7 +133,7 @@ app.post("/logout", function (req, res) {
   res.redirect("/login");
 });
 
-app.get("/dashboard_contents");
+app.post("/get_dashboard_contents", function (req, res) {});
 
 app.post("/sign_up", function (req, res) {
   const teacher = new Teacher({
