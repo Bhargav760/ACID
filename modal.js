@@ -5,7 +5,7 @@ const passportLocalMongoose = require("passport-local-mongoose");
 // Course Modal Schema
 const userSchema = new mongoose.Schema(
   {
-    _id: Number,
+    _id: {},
     name: String,
     password: String,
   },
@@ -17,7 +17,7 @@ const userSchema = new mongoose.Schema(
 // Student Modal Schema
 const userDataSchema = new mongoose.Schema(
   {
-    _id: Number,
+    _id: {},
     clgName: String,
     prn: String,
     branch: String,
@@ -30,7 +30,7 @@ const userDataSchema = new mongoose.Schema(
 );
 
 const students = new mongoose.Schema({
-  _id: { Number },
+  _id: {},
   test_id: { Number },
   rollno: { Number },
   password: { String },
@@ -40,7 +40,7 @@ const students = new mongoose.Schema({
 
 const teacherSchema = new mongoose.Schema(
   {
-    _id: { Number },
+    _id: {},
     username: { String },
     password: { String },
     verified: false,
@@ -51,13 +51,13 @@ const teacherSchema = new mongoose.Schema(
 );
 
 const classesSchema = new mongoose.Schema({
-  _id: { Number },
+  _id: {},
   name: { String },
 });
 
 const testsSchema = new mongoose.Schema({
-  _id: { Number },
-  teacher_id: { Number },
+  _id: {},
+  teacher_id: {},
   name: { String },
   date: { type: Date, default: Date.now },
   status_id: { Number },
@@ -67,31 +67,27 @@ const testsSchema = new mongoose.Schema({
 });
 
 const status = new mongoose.Schema({
-  _id: { Number },
+  _id: {},
   name: { String },
 });
 
 const questionsSchema = new mongoose.Schema({
-  _id: { Number },
+  _id: {},
   title: { String },
-  optionA: { String },
-  optionB: { String },
-  optionC: { String },
-  optionD: { String },
   oneWord: { Boolean },
   correctAns: { String },
   score: { Number },
 });
 
 const question_test_mapping = new mongoose.Schema({
-  question_id: { Number },
-  test_id: { Number },
+  question_id: {},
+  test_id: {},
 });
 
 const score = new mongoose.Schema({
-  _id: { Number },
-  test_id: { Number },
-  question_id: { Number },
+  _id: {},
+  test_id: {},
+  question_id: {},
   correct_count: { Number },
   wrong_count: { Number },
 });

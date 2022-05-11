@@ -96,37 +96,22 @@
                   </div>
                 </div>
                 <div class="card-body">
-                  <!-- <?php
-                    include '../../database/config.php';
-                    $user_id = $_SESSION["user_id"];
-                    $sql = "select * from tests where teacher_id = $user_id and status_id IN (1,2)";
-                    $result = mysqli_query($conn,$sql);
-                    if(mysqli_num_rows($result) >
-                  0) { while($row = mysqli_fetch_assoc($result)) { ?> -->
+                  <% if(data != null && data.length != 0) { %> <%
+                  data.forEach(function(item){ %>
                   <div class="card" style="background: #ededed">
-                    <div class="card-body" onclick="submit(<?= $row['id'];?>)">
-                      <h6><?= $row["name"];?></h6>
+                    <div class="card-body" onclick="submit(<%= item._id %>)">
+                      <h6><%=item.name%></h6>
                       <div class="row">
                         <div class="col-md-8">
-                          <p>
-                            Subject -
-                            <?= $row["subject"];?>
-                          </p>
+                          <p>Subject - <%=item.subject%></p>
                         </div>
                         <div class="col-md-4">
-                          <p style="text-align: right">
-                            Date -
-                            <?= $row["date"];?>
-                          </p>
+                          <p style="text-align: right">Date - <%=item.data%></p>
                         </div>
                       </div>
                     </div>
                   </div>
-                  <!-- <?php
-                      }
-                    }
-                    else {
-                      ?> -->
+                  <%})} else {%>
                   <div id="no-data">
                     <center>
                       <img
@@ -137,9 +122,7 @@
                       <center><h5>No Data</h5></center>
                     </center>
                   </div>
-                  <!-- <?php
-                    }
-                  ?> -->
+                  <%}%>
                 </div>
               </div>
             </div>
@@ -164,23 +147,5 @@
       document.getElementById("test_id").value = val1;
       document.getElementById("test_details").submit();
     }
-
-    $(document).ready(function () {
-      $.ajax({
-        type: "GET",
-        url: "/get_dashboard_contents",
-        success: function (response) {
-          console.log("hi");
-          console.log(response);
-          console.log(response.length);
-          if (response.length > 0) {
-            console.log("not");
-            var temp = document.getElementById("row");
-            temp.style.display = "block";
-            $("#test_name").text(response);
-          }
-        },
-      });
-    });
   </script>
 </html>
