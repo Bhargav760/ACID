@@ -92,6 +92,38 @@ app.get("/homePageTeacher", function (req, res) {
   }
 });
 
+app.get("/add_data", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("add_data");
+  } else {
+    res.redirect("/loginT");
+  }
+});
+
+app.get("/statistics", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("statistics");
+  } else {
+    res.redirect("/loginT");
+  }
+});
+
+app.get("/view_data", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("view_data");
+  } else {
+    res.redirect("/loginT");
+  }
+});
+
+app.get("/new_test", function (req, res) {
+  if (req.isAuthenticated()) {
+    res.render("new_test");
+  } else {
+    res.redirect("/loginT");
+  }
+});
+
 app.get("/logout", function (req, res) {
   req.logout();
   res.redirect("/");
@@ -101,12 +133,7 @@ app.post("/logout", function (req, res) {
   res.redirect("/login");
 });
 
-app.get("/dashboard_contents");
-
-// app.post("/logout", function(req, res){
-//   req.logout();
-//   res.redirect("/");
-// });
+app.post("/get_dashboard_contents", function (req, res) {});
 
 app.post("/sign_up", function (req, res) {
   const teacher = new Teacher({
