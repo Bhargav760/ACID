@@ -1,0 +1,37 @@
+<%- include("partials/header") -%>
+
+    <div class="container mt-5">
+        <h1>Login</h1>
+
+        <div class="row">
+            <div class="col-sm-8">
+                <div class="card">
+                    <div class="card-body">
+                        <!-- Makes POST request to /login route -->
+                        <p>
+                            <%- error %>
+                        </p>
+
+                        <form id="loginTeacher" action="/loginTeacher" method="POST">
+                            <div class="form-group">
+                                <label for="username">Email</label>
+                                <input type="email" class="form-control" name="username" placeholder="Enter email" />
+                            </div>
+                            <div class="form-group">
+                                <label for="password">Password</label>
+                                <input type="password" class="form-control" name="password"
+                                    placeholder="Enter Password" />
+
+                                <input id="teacher" type="button" value="Student Login" class="login"
+                                    style="float: right"
+                                    onclick="window.location.href = 'http://localhost:3000/login'" />
+                            </div>
+                            <button type="submit" class="btn btn-dark">Login</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <%- include('partials/footer') %>
