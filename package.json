@@ -1,0 +1,29 @@
+{
+  "name": "acid",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Bhargav760/ACID.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/Bhargav760/ACID/issues"
+  },
+  "homepage": "https://github.com/Bhargav760/ACID#readme",
+  "dependencies": {
+    "body-parser": "^1.20.0",
+    "ejs": "^3.1.7",
+    "express": "^4.18.1",
+    "express-session": "^1.17.2",
+    "mongoose": "^6.3.3",
+    "passport": "^0.5.2",
+    "passport-local": "^1.0.0",
+    "request": "^2.88.2"
+  }
+}
