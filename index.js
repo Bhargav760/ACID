@@ -100,17 +100,18 @@ app.get("/add_data", function (req, res) {
   }
 });
 
-app.get("/statistics", function (req, res) {
-  if (req.isAuthenticated()) {
-    res.render("statistics");
-  } else {
-    res.redirect("/loginT");
-  }
-});
+
 
 app.get("/view_data", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("view_data");
+    const fun1 = async () => {
+      a = await UserData.find({});
+
+      res.render("view_data", {
+        user: a,
+      });
+    }
+    fun1();
   } else {
     res.redirect("/loginT");
   }
@@ -133,7 +134,7 @@ app.post("/logout", function (req, res) {
   res.redirect("/login");
 });
 
-app.post("/get_dashboard_contents", function (req, res) {});
+app.post("/get_dashboard_contents", function (req, res) { });
 
 app.post("/sign_up", function (req, res) {
   const teacher = new Teacher({
@@ -253,6 +254,7 @@ const moodle = function (prn, password, req, res1, user) {
     }
   });
 };
+
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");
