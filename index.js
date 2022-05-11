@@ -8,6 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const request = require("request");
 
+var ses;
 const {
   User,
   UserData,
@@ -15,7 +16,7 @@ const {
   Student,
   Class,
   StudentData,
-  Teat,
+  Test,
   Status,
   Questio,
   QTM,
@@ -86,7 +87,22 @@ app.get("/homePage", function (req, res) {
 
 app.get("/homePageTeacher", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("homePageTeacher");
+    sess = req.session;
+    console.log(sess.uid);
+    Test.find({ teacher_id: sess.uid }, function (err, docs) {
+      console.log(docs);
+      if (err != null) {
+        console.log(`Error occured ${err}`);
+        res.render("homePageTeacher", { data: null });
+      } else if (docs != null && docs.length != 0) {
+        console.log(`Found ${docs}`);
+        console.log(docs);
+        res.render("homePageTeacher", { data: docs });
+      } else {
+        console.log(`not Found ${docs}`);
+        res.render("homePageTeacher", { data: null });
+      }
+    });
   } else {
     res.redirect("/loginT");
   }
@@ -169,7 +185,13 @@ app.post("/loginTeacher", function (req, res) {
       res.render("login", { error: loginError });
     } else {
       passport.authenticate("teacherlocal")(req, res, function () {
-        res.redirect("/homePageTeacher");
+        sess = req.session;
+
+        Teacher.findOne({ username: teacher.username }, function (err, docs) {
+          console.log(docs._id);
+          sess.uid = docs._id;
+          res.redirect("/homePageTeacher");
+        });
       });
     }
   });
