@@ -13,21 +13,20 @@
     <title> </title>
     <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
         name="viewport" />
-    <!--     Fonts and icons     -->
+
     <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
-    <!-- <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> -->
+
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
-    <!-- CSS Files -->
+
     <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
     <link href="assets/css/now-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
-    <!-- <link type="text/css" rel="stylesheet" href="http://jqueryte.com/css/jquery-te.css" charset="utf-8"> -->
+
     <link href="assets/css/main.css" rel="stylesheet" />
 </head>
 
 <body class="">
     <div class="wrapper">
-        <!-- sidebar -->
-        <!-- <?php include "sidebar.php";?> -->
+
         <%- include('slidebar') %>
             <div class="main-panel">
                 <!-- Navbar -->
@@ -49,11 +48,11 @@
                             <span class="navbar-toggler-bar navbar-kebab"></span>
                             <span class="navbar-toggler-bar navbar-kebab"></span>
                         </button>
-                        <!-- <?php include "navitem.php"; ?> -->
+
                         <%- include('navitem') %>
                     </div>
                 </nav>
-                <!-- End Navbar -->
+
                 <div class="panel-header panel-header-sm"></div>
                 <div class="content" style="min-height: auto">
                     <div class="row">
@@ -97,7 +96,7 @@
                                             </div>
                                         </div>
                                     </div>
-                                    <!-- </form> -->
+
                                 </div>
                             </div>
                         </div>
@@ -216,18 +215,7 @@
                     $("#starting_roll_number").val(),
                     $("#ending_roll_number").val()
                 );
-                // $.ajax({
-                //   type: "POST",
-                //   url: "/add_new_class",
-                //   data: {
-                //     class_name: $("#class_name").val(),
-                //     starting_roll_number: $("#starting_roll_number").val(),
-                //     ending_roll_number: $("#ending_roll_number").val(),
-                //   },
-                //   success: function (response) {
-                //     alert(response);
-                //   },
-                // });
+
             }
         }
 

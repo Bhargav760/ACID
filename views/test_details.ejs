@@ -1,4 +1,4 @@
-<!-- <?php
+<?php
 session_start();
 if(!isset($_SESSION["user_id"]))
   header("Location:../index.php");
@@ -135,10 +135,11 @@ if(!isset($_SESSION["user_id"]))
     $class = $gen1["name"];    
   }
 
-?> -->
+?>
 
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="utf-8" />
   <link rel="apple-touch-icon" sizes="76x76" href="../assets/img/apple-icon.png">
@@ -148,25 +149,29 @@ if(!isset($_SESSION["user_id"]))
   <meta http-equiv="pragma" content="no-cache" />
   <meta http-equiv="expires" content="-1" />
   <title>
-    Test Details
+    <?=ucfirst(basename($_SERVER['PHP_SELF'], ".php"));?>
   </title>
-  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no' name='viewport' />
+  <meta content='width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no'
+    name='viewport' />
   <!--     Fonts and icons     -->
   <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
   <!-- <link href="https://use.fontawesome.com/releases/v5.0.6/css/all.css" rel="stylesheet"> -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
   <!-- CSS Files -->
-  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-  <link href="assets/css/now-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="../assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="../assets/css/now-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
   <!-- <link type="text/css" rel="stylesheet" href="http://jqueryte.com/css/jquery-te.css" charset="utf-8"> -->
-  <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css" charset="utf-8">
-  <link href="assets/css/main.css" rel="stylesheet" />
+  <link type="text/css" rel="stylesheet" href="https://cdn.datatables.net/1.10.20/css/dataTables.bootstrap4.min.css"
+    charset="utf-8">
+  <link href="../assets/css/main.css" rel="stylesheet" />
 </head>
 
 <body class="">
   <div class="wrapper ">
     <!-- sidebar -->
-    <%- include('slidebar') %>
+    <?php
+      include "sidebar.php";
+    ?>
     <div class="main-panel">
       <!-- Navbar -->
       <nav class="navbar navbar-expand-lg navbar-transparent  navbar-absolute bg-primary fixed-top">
@@ -181,12 +186,13 @@ if(!isset($_SESSION["user_id"]))
             </div>
             <a class="navbar-brand" href="#pablo">Test Details</a>
           </div>
-          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation" aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+          <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
             <span class="navbar-toggler-bar navbar-kebab"></span>
           </button>
-          <%- include('navitem') %>
+          <?php include "navitem.php"; ?>
         </div>
       </nav>
       <!-- End Navbar -->
@@ -200,42 +206,49 @@ if(!isset($_SESSION["user_id"]))
                 <h5 class="title">General Settings</h5>
               </div>
               <div class="card-body">
-                <form method="POST" action="/submit_test_details">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF"]);?>">
                   <input type="hidden" name="general_settings_update">
-                  <input type="hidden" name="test_id" value="<%=test._id%>">
+                  <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   <div class="row">
                     <div class="col-md-12">
                       <div class="form-group">
                         <label>Test name (title)</label>
-                        <input type="text" class="form-control" name="test_name" placeholder="Test name" value="<%=test.name%>"/>
+                        <input type="text" class="form-control" name="test_name" placeholder="Test name" value="" />
                       </div>
                       <div class="form-group">
                         <label>Subject name</label>
-                        <input type="text" class="form-control" name="subject_name" placeholder="Subject name" value="<%test.subject%>"/>
+                        <input type="text" class="form-control" name="subject_name" placeholder="Subject name"
+                          value="<?= $test_details[" subject"];?>"/>
                       </div>
                       <div class="form-group">
                         <label>Test date</label>
-                          <input type="date" class="form-control" name="test_date" placeholder="Test Date" value="<%=test.data%>" required/>
+                        <input type="date" class="form-control" name="test_date" placeholder="Test Date"
+                          value="<?= $test_details[" date"];?>" required/>
                       </div>
                       <div class="form-group">
                         <label>Total Questions count</label>
-                          <input type="number" class="form-control" name="total_questions" placeholder="Total Questions count" value="<%=test.total_questions%>" required/>
+                        <input type="number" class="form-control" name="total_questions"
+                          placeholder="Total Questions count" value="<?= $test_details[" total_questions"];?>"
+                        required/>
                       </div>
                       <div class="form-group">
                         <select id="options" name="test_status" class="btn-round" required style="width:100%;">
-                            <option selected="true" value="" disabled="disabled">Select test status</option>
-                            <?php
+                          <option selected="true" value="" disabled="disabled">Select test status</option>
+                          <?php
 
                               $sql = "select * from status where id IN(1,2)";
                               $result = mysqli_query($conn,$sql);
                               while($row = mysqli_fetch_assoc($result)) {
                                 ?>
 
-                                <option value="<?= $row["name"];?>" <?php if($status == $row["name"]) echo "selected"; ?> ><?= $row["name"];?></option>
+                          <option value="<?= $row[" name"];?>"
+                            <?php if($status == $row["name"]) echo "selected"; ?> >
+                            <?= $row["name"];?>
+                          </option>
 
-                                <?php
+                          <?php
                               }
-                            ?>                             
+                            ?>
                         </select>
                       </div>
                     </div>
@@ -259,7 +272,8 @@ if(!isset($_SESSION["user_id"]))
               <div class="card-body">
                 <div class="row">
 
-                  <form id="form-completed" method="POST" action="<?php echo htmlspecialchars($_SERVER["PHP_SELF"]);?>">
+                  <form id="form-completed" method="POST" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF"]);?>
+                    ">
                     <input type="hidden" name="completed">
                     <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   </form>
@@ -268,22 +282,22 @@ if(!isset($_SESSION["user_id"]))
                     <div class="form-group">
                       <button class="btn btn-primary btn-block" onclick="completed()">MAKE AS COMPLETED</button>
                     </div>
-                  </div>            
-                  
-                  <form id="form-deleted" method="POST" action="<....?>">
+                  </div>
+
+                  <form id="form-deleted" method="POST" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF"]);?>">
                     <input type="hidden" name="deleted">
-                    <input type="hidden" name="test_id" value="<%=test._id%>">
+                    <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   </form>
 
                   <div class="col-md-6">
                     <div class="form-group">
                       <button class="btn btn-primary btn-block" onclick="deleted()">DELETE TEST</button>
-                    </div>  
-                  </div>        
+                    </div>
+                  </div>
                 </div>
 
                 <form id="form-student-data" method="POST" action="student_test_credentials.php">
-                    <input type="hidden" name="test_id" value="<%=test._id%>">
+                  <input type="hidden" name="test_id" value="<?= $test_id;?>">
                 </form>
 
                 <div class="row">
@@ -291,15 +305,15 @@ if(!isset($_SESSION["user_id"]))
                     <div class="form-group">
                       <button class="btn btn-primary btn-block" onclick="student_data()">GET STUDENT DATA</button>
                     </div>
-                  </div>   
+                  </div>
                 </div>
 
-                <form method="POST" action="....">
+                <form method="POST" action="<?php echo htmlspecialchars($_SERVER[" PHP_SELF"]);?>">
                   <input type="hidden" name="other_settings">
-                  <input type="hidden" name="test_id" value="<%=test._id%>">
+                  <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   <div class="form-group" style="margin-top:10px;">
                     <label>Student Roll number / user id</label>
-                    <input type="text" class="form-control" name="student_roll_no" placeholder="Student Roll number"/>
+                    <input type="text" class="form-control" name="student_roll_no" placeholder="Student Roll number" />
                   </div>
 
                   <div class="row center-element">
@@ -316,7 +330,7 @@ if(!isset($_SESSION["user_id"]))
         </div>
       </div>
       <div class="content" style="min-height: auto;">
-        <div class="row">                      
+        <div class="row">
           <div class="col-md-12">
             <div class="card" style="min-height:400px;">
               <div class="card-header">
@@ -325,30 +339,36 @@ if(!isset($_SESSION["user_id"]))
                     <h5 class="title">Test Questions</h5>
                   </div>
                   <form id="form-add-questions" method="POST" action="add_question.php">
-                    <input type="hidden" name="test_id" value="<%=test._id%>">
+                    <input type="hidden" name="test_id" value="<?= $test_id;?>">
                   </form>
                   <div class="col-md-4">
-                    <button class="btn btn-primary btn-block btn-round" data-toggle="modal" data-target="#exampleModal" style="margin-top:0px;width:200px !important;float:right !important;">UPLOAD</button>
+                    <button class="btn btn-primary btn-block btn-round" data-toggle="modal" data-target="#exampleModal"
+                      style="margin-top:0px;width:200px !important;float:right !important;">UPLOAD</button>
                   </div>
 
                   <div class="col-md-4">
-                    <button class="btn btn-primary btn-block btn-round" onclick="redirect_to_add_question()" style="margin-top:0px;width:200px !important;float:right !important;">ADD NEW QUESTION</button>
+                    <button class="btn btn-primary btn-block btn-round" onclick="redirect_to_add_question()"
+                      style="margin-top:0px;width:200px !important;float:right !important;">ADD NEW QUESTION</button>
                   </div>
-                </div>  
+                </div>
               </div>
               <div class="card-body">
-                  <table id="example" class="table table-striped table-bordered" style="width:100%">
-                    <thead>
-                        <tr>
-                            <th>SERIAL NO</th>
-                            <th>Question title</th>
-                            <th>Correct Answer</th>
-                            <th>Score</th>
-                            <th>Delete</th>
-                        </tr>
-                    </thead>
-                    <tbody>
-                        <?php
+                <table id="example" class="table table-striped table-bordered" style="width:100%">
+                  <thead>
+                    <tr>
+                      <th>SERIAL NO</th>
+                      <th>Question title</th>
+                      <th>Option (A)</th>
+                      <th>Option (B)</th>
+                      <th>Option (C)</th>
+                      <th>Option (D)</th>
+                      <th>Correct Option</th>
+                      <th>Score</th>
+                      <th>Delete</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    <?php
                           $sql = "select question_id from question_test_mapping where test_id = $test_id";
                           $result = mysqli_query($conn,$sql);
                           $i = 1;
@@ -358,26 +378,45 @@ if(!isset($_SESSION["user_id"]))
                             $result1 = mysqli_query($conn,$sql1);
                             $row1 = mysqli_fetch_assoc($result1);
                             ?>
-                            <tr id = "<?= $row1["id"]; ?>">
-                              <input type="hidden" id="question_id" value="<?= $row1["id"]; ?>">
-                              <td><?= $i;?></td>
-                              <td><?= $row1["title"];?></td>
-                              <td><?= $row1["optionA"];?></td>
-                              <td><?= $row1["optionB"];?></td>
-                              <td><?= $row1["optionC"];?></td>
-                              <td><?= $row1["optionD"];?></td>
-                              <td><?= $row1["correctAns"];?></td>
-                              <td><?= $row1["score"];?></td>
-                              <td><button id="delete" name="delete" class="btn btn-primary btn-block btn-round" onclick="delete_question('<?= $row1["id"]; ?>','<?php echo $test_id; ?>')">DELETE</button></td>
-                            </tr>
+                    <tr id="<?= $row1[" id"]; ?>">
+                      <input type="hidden" id="question_id" value="<?= $row1[" id"]; ?>">
+                      <td>
+                        <?= $i;?>
+                      </td>
+                      <td>
+                        <?= $row1["title"];?>
+                      </td>
+                      <td>
+                        <?= $row1["optionA"];?>
+                      </td>
+                      <td>
+                        <?= $row1["optionB"];?>
+                      </td>
+                      <td>
+                        <?= $row1["optionC"];?>
+                      </td>
+                      <td>
+                        <?= $row1["optionD"];?>
+                      </td>
+                      <td>
+                        <?= $row1["correctAns"];?>
+                      </td>
+                      <td>
+                        <?= $row1["score"];?>
+                      </td>
+                      <td><button id="delete" name="delete" class="btn btn-primary btn-block btn-round"
+                          onclick="delete_question('<?= $row1[" id"]; ?>','
+                          <?php echo $test_id; ?>')">DELETE
+                        </button></td>
+                    </tr>
 
-                          <?php
+                    <?php
                           $i++;
                           }    
                         ?>
 
-                    </tbody>
-                  </table>
+                  </tbody>
+                </table>
               </div>
             </div>
           </div>
@@ -385,45 +424,59 @@ if(!isset($_SESSION["user_id"]))
       </div>
 
       <!-- Modal -->
-      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel"
+        aria-hidden="true">
         <div class="modal-dialog" role="document">
-        <form id="form-file-upload" name="form-file-upload" method="POST" action="file_upload.php" enctype="multipart/form-data">
-          <input type="hidden" name="file_upload">
-          <input type="hidden" name="test_id" id ="test_id" value="<?= $test_id; ?>">
-          <input type="hidden" name="tmp_name" id="tmp_name">
-          <input type="hidden" name="type" id="type"> 
-          <div class="modal-content">
-            <div class="modal-header">
-              <h5 class="modal-title" id="exampleModalLabel">Select spreadsheet to import</h5>
+          <form id="form-file-upload" name="form-file-upload" method="POST" action="file_upload.php"
+            enctype="multipart/form-data">
+            <input type="hidden" name="file_upload">
+            <input type="hidden" name="test_id" id="test_id" value="<?= $test_id; ?>">
+            <input type="hidden" name="tmp_name" id="tmp_name">
+            <input type="hidden" name="type" id="type">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Select spreadsheet to import</h5>
+              </div>
+              <div class="modal-body">
+                <p><b>The spreadsheet column should contain (without header):</b> <br> Question, Option A, Option B,
+                  Option C, Option D, Correct Option, Score.</p>
+                <p><b>Accepted file formats are:</b> .xls, .xlsx and .ods</p>
+                <input type="file" name="file" id="file" accept=".xls,.xlsx,.ods">
+              </div>
+              <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                <button type="button" class="btn btn-primary" onclick="file_upload_submit()">Upload</button>
+              </div>
             </div>
-            <div class="modal-body">
-              <p><b>The spreadsheet column should contain (without header):</b> <br> Question, Option A, Option B, Option C, Option D, Correct Option, Score.</p>
-              <p><b>Accepted file formats are:</b> .xls, .xlsx and .ods</p>
-              <input type="file" name="file" id="file" accept=".xls,.xlsx,.ods">
-            </div>
-            <div class="modal-footer">
-              <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-              <button type="button" class="btn btn-primary" onclick="file_upload_submit()">Upload</button>
-            </div>
-          </div>
-        </form>
+          </form>
         </div>
       </div>
 
 
       <!-- footer -->
-      <%- include('footer') %>
+
+      <%-include "footer" %>;
+
     </div>
   </div>
-<script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
-<script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
-<script>
+  <!--   Core JS Files   -->
+  <script src="../assets/js/core/jquery.min.js"></script>
+  <script src="../assets/js/core/bootstrap.min.js"></script>
+  <script src="../assets/js/plugins/perfect-scrollbar.jquery.min.js"></script>
+  <!--  Notifications Plugin    -->
+  <script src="../assets/js/plugins/bootstrap-notify.js"></script>
+  <!-- Control Center for Now Ui Dashboard: parallax effects, scripts for the example pages etc -->
+  <script src="../assets/js/now-ui-dashboard.min.js?v=1.1.0" type="text/javascript"></script>
+  <!-- <script src="http://jqueryte.com/js/jquery-te-1.4.0.min.js"></script> -->
+  <script src="https://cdn.datatables.net/1.10.20/js/jquery.dataTables.min.js"></script>
+  <script src="https://cdn.datatables.net/1.10.20/js/dataTables.bootstrap4.min.js"></script>
+  <script>
     function redirect_to_add_question() {
       document.getElementById("form-add-questions").submit();
     }
 
-    $(document).ready(function() {
-        $('#example').DataTable();
+    $(document).ready(function () {
+      $('#example').DataTable();
     });
 
     function completed() {
@@ -442,51 +495,51 @@ if(!isset($_SESSION["user_id"]))
       document.getElementById("form-file-upload").submit();
     }
 
-    function delete_question(temp,testid) {
+    function delete_question(temp, testid) {
       var temp1 = document.getElementById(temp);
       temp1.style.display = 'none';
       $.ajax({
-          type: 'POST',
-          url: 'delete_question.php',
-          data: {
-            'question_id': temp,
-            'test_id': testid,
-          },
-          success: function (response) {
-          }
+        type: 'POST',
+        url: 'delete_question.php',
+        data: {
+          'question_id': temp,
+          'test_id': testid,
+        },
+        success: function (response) {
+        }
       });
     }
 
-</script>
-<?php
+  </script>
+  <?php
 //Checking if general settings updated successfully
   if($general_settings == "true")
   {
     ?>
 
-    <script type="text/javascript">
-      $.notify({
-        message: 'General Settings Updated Successfully' 
-      },{
-        type: 'success'
-      });
-    </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'General Settings Updated Successfully'
+    }, {
+      type: 'success'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else if($general_settings == "false")
   {
     ?>
 
-      <script type="text/javascript">
-        $.notify({
-          message: 'There was an error updating general settings' 
-        },{
-          type: 'danger'
-        });
-      </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'There was an error updating general settings'
+    }, {
+      type: 'danger'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else {}
   
@@ -495,29 +548,29 @@ if(!isset($_SESSION["user_id"]))
   {
     ?>
 
-    <script type="text/javascript">
-      $.notify({
-        message: 'Student Added Successfully' 
-      },{
-        type: 'success'
-      });
-    </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'Student Added Successfully'
+    }, {
+      type: 'success'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else if($other_settings == "false")
   {
     ?>
 
-      <script type="text/javascript">
-        $.notify({
-          message: 'There was an error in adding student' 
-        },{
-          type: 'danger'
-        });
-      </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'There was an error in adding student'
+    }, {
+      type: 'danger'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else {}
 
@@ -526,35 +579,35 @@ if(!isset($_SESSION["user_id"]))
   {
     ?>
 
-    <script type="text/javascript">
-      $.notify({
-        message: 'Test Completed Successfully' 
-      },{
-        type: 'success'
-      });
-      var delayInMilliseconds = 1500; //1 second
+  <script type="text/javascript">
+    $.notify({
+      message: 'Test Completed Successfully'
+    }, {
+      type: 'success'
+    });
+    var delayInMilliseconds = 1500; //1 second
 
-      setTimeout(function() {
-        window.location = 'dashboard.php';
-      }, delayInMilliseconds);
-    
-    </script>
+    setTimeout(function () {
+      window.location = 'dashboard.php';
+    }, delayInMilliseconds);
 
-    <?php
+  </script>
+
+  <?php
   }
   else if($complete == "false")
   {
     ?>
 
-      <script type="text/javascript">
-        $.notify({
-          message: 'There was an error in updating test status' 
-        },{
-          type: 'danger'
-        });
-      </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'There was an error in updating test status'
+    }, {
+      type: 'danger'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else {}
 
@@ -563,37 +616,38 @@ if(!isset($_SESSION["user_id"]))
   {
     ?>
 
-    <script type="text/javascript">
-      $.notify({
-        message: 'Test deleted successfully' 
-      },{
-        type: 'success'
-      });
-      var delayInMilliseconds = 1500; //1 second
+  <script type="text/javascript">
+    $.notify({
+      message: 'Test deleted successfully'
+    }, {
+      type: 'success'
+    });
+    var delayInMilliseconds = 1500; //1 second
 
-      setTimeout(function() {
-        window.location = 'dashboard.php';
-      }, delayInMilliseconds);
-    </script>
+    setTimeout(function () {
+      window.location = 'dashboard.php';
+    }, delayInMilliseconds);
+  </script>
 
-    <?php
+  <?php
   }
   else if($delete == "false")
   {
     ?>
 
-      <script type="text/javascript">
-        $.notify({
-          message: 'There was an error in deleting test' 
-        },{
-          type: 'danger'
-        });
-      </script>
+  <script type="text/javascript">
+    $.notify({
+      message: 'There was an error in deleting test'
+    }, {
+      type: 'danger'
+    });
+  </script>
 
-    <?php
+  <?php
   }
   else {}
 ?>
 
 </body>
+
 </html>

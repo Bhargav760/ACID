@@ -56,14 +56,13 @@ const classesSchema = new mongoose.Schema({
 });
 
 const testsSchema = new mongoose.Schema({
-  _id: {},
+  //_id: {},
   teacher_id: {},
-  name: { String },
+  name: {},
   date: { type: Date, default: Date.now },
-  status_id: { Number },
-  subject: { String },
-  total_questions: { Number },
-  class_id: { Number },
+  subject: {},
+  total_questions: {},
+  // class_id: { Number },
 });
 
 const status = new mongoose.Schema({

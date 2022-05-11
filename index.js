@@ -8,7 +8,7 @@ const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const request = require("request");
 
-var ses;
+var sess;
 const {
   User,
   UserData,
@@ -40,7 +40,7 @@ app.use(
     secret: "Our little secret.",
     resave: false,
     saveUninitialized: false,
-    cookie: { maxAge: 60000 },
+    cookie: { maxAge: 600000 },
   })
 );
 
@@ -65,6 +65,7 @@ app.get("/", function (req, res) {
   res.render("home");
 });
 
+
 app.get("/login", function (req, res) {
   res.render("login", { error: "" });
 });
@@ -79,7 +80,7 @@ app.get("/sign_up", function (req, res) {
 
 app.get("/homePage", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("homePage");
+    res.redirect("homePage");
   } else {
     res.redirect("/login");
   }
@@ -90,13 +91,13 @@ app.get("/homePageTeacher", function (req, res) {
     sess = req.session;
     console.log(sess.uid);
     Test.find({ teacher_id: sess.uid }, function (err, docs) {
-      console.log(docs);
+      //console.log(docs);
       if (err != null) {
         console.log(`Error occured ${err}`);
         res.render("homePageTeacher", { data: null });
       } else if (docs != null && docs.length != 0) {
-        console.log(`Found ${docs}`);
-        console.log(docs);
+        // console.log(`Found ${docs}`);
+        // console.log(docs);
         res.render("homePageTeacher", { data: docs });
       } else {
         console.log(`not Found ${docs}`);
@@ -115,8 +116,6 @@ app.get("/add_data", function (req, res) {
     res.redirect("/loginT");
   }
 });
-
-
 
 app.get("/view_data", function (req, res) {
   if (req.isAuthenticated()) {
@@ -149,6 +148,39 @@ app.get("/logout", function (req, res) {
 app.post("/logout", function (req, res) {
   res.redirect("/login");
 });
+app.post("/create_test", function (req, res) {
+  sess = req.session;
+  console.log(sess.uid);
+  const test = new Test({
+    teacher_id: sess.uid,
+    name: req.body.test_name,
+    date: req.body.test_date,
+    subject: req.body.subject_name,
+    total_questions: req.body.total_questions,
+  })
+  test
+    .save()
+    .then(() => {
+      console.log("sucess");
+    })
+    .catch(() => {
+      console.log("error");
+    });
+  res.redirect("/homePageTeacher");
+
+});
+app.get("/homePage", function (req, res) {
+
+  // fun1 = async () => {
+  //   var a = await Test.find({});
+  //   console.log(a);
+  //   res.render("homePage", {
+  //     nt: a,
+  //   })
+  // }
+  // fun1();
+  res.render("homePage");
+})
 
 app.post("/get_dashboard_contents", function (req, res) { });
 
@@ -225,7 +257,7 @@ const moodle = function (prn, password, req, res1, user) {
         const userData = new UserData({
           _id: Mdata.userid,
           clgName: Mdata.sitename,
-          prn: Mdata.username,
+          prn: Mdata.username.substr(12),
           branch: Mdata.firstname,
           name: Mdata.lastname.substr(Mdata.lastname.indexOf(" ") + 1),
         });
@@ -242,7 +274,7 @@ const moodle = function (prn, password, req, res1, user) {
                 console.log(err);
               } else {
                 passport.authenticate("userlocal")(req, res, function () {
-                  res1.redirect("/homePage");
+
                 });
               }
             });
@@ -264,14 +296,14 @@ const moodle = function (prn, password, req, res1, user) {
                     }
                   });
                   passport.authenticate("userlocal")(req, res, function () {
-                    res1.redirect("homePage");
+                    res1.redirect("/homePage");
                   });
                 }
               }
             );
           }
         });
-        //res1.render("homePage");
+
       });
     }
   });
