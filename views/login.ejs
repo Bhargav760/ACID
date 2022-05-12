@@ -47,47 +47,4 @@
   </div>
 </div>
 
-<!-- <script>
-  let flag = false;
-  // const userNameLabel = document.querySelector('label[for="username"]');
-  // const userNameInput = document.querySelector('input[name="username"]');
-  // const changeLabel = document.querySelector(".login");
-  // console.log(userNameInput, userNameLabel, changeLabel);
-
-  // changeLabel.addEventListener("click", function () {
-  //   if (flag) {
-  //     changeLabel.value = "Teacher Login";
-  //     userNameLabel.textContent = "PRN";
-  //     userNameInput.placeholder = "Enter PRN";
-  //     flag = false;
-  //   } else {
-  //     changeLabel.value = "Student Login";
-  //     userNameLabel.textContent = "Email";
-  //     userNameInput.placeholder = "Enter Email";
-  //     flag = true;
-  //   }
-  //   console.log(flag);
-  // });
-
-  // userNameLabel.addEventListener("keyDown", function (event) {
-  //   const key = event.keyCode;
-  //   return (key >= 65 && key <= 90) || key == 8;
-  // });
-
-  document.querySelector("#teacher").addEventListener("click", function () {
-    if (flag) {
-      flag = false;
-      document.querySelector("#loginStudent").classList.toggle("hidden");
-      document.querySelector("#loginTeacher").classList.toggle("hidden");
-    }
-  });
-  document.querySelector("#student").addEventListener("click", function () {
-    if (!flag) {
-      flag = true;
-      document.querySelector("#loginStudent").classList.toggle("hidden");
-      document.querySelector("#loginTeacher").classList.toggle("hidden");
-    }
-  });
-</script> -->
-
 <%- include('partials/footer') %>
