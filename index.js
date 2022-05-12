@@ -7,6 +7,7 @@ const session = require("express-session");
 const passport = require("passport");
 const LocalStrategy = require("passport-local").Strategy;
 const request = require("request");
+var ObjectID = require('mongodb').ObjectID;
 
 var sess;
 const {
@@ -15,12 +16,13 @@ const {
   Teacher,
   Student,
   Class,
-  StudentData,
+  Student_data,
   Test,
   Status,
   Questio,
   QTM,
   Score,
+  Question,
 } = require("./modal");
 
 const loginError = `<div class="messages error"><div class="messages-container"><div class="message-text" aria-invalid="1" tabindex="-1" >Error: The email address and password combination you entered cannot be recognized or does not exist. Please try again.</div></div></div>`;
@@ -100,7 +102,7 @@ app.get("/homePageTeacher", function (req, res) {
         // console.log(docs);
         res.render("homePageTeacher", { data: docs });
       } else {
-        console.log(`not Found ${docs}`);
+        //console.log(`not Found ${docs}`);
         res.render("homePageTeacher", { data: null });
       }
     });
@@ -111,7 +113,10 @@ app.get("/homePageTeacher", function (req, res) {
 
 app.get("/add_data", function (req, res) {
   if (req.isAuthenticated()) {
-    res.render("add_data");
+    Class.find({}, function (err, docs) {
+      console.log(docs);
+      res.render("add_data", { classList: docs });
+    });
   } else {
     res.redirect("/loginT");
   }
@@ -125,7 +130,7 @@ app.get("/view_data", function (req, res) {
       res.render("view_data", {
         user: a,
       });
-    }
+    };
     fun1();
   } else {
     res.redirect("/loginT");
@@ -188,7 +193,7 @@ app.get("/Student", function (req, res) {
   })
 })
 
-app.post("/get_dashboard_contents", function (req, res) { });
+app.post("/get_dashboard_contents", function (req, res) {});
 
 app.post("/sign_up", function (req, res) {
   const teacher = new Teacher({
@@ -315,6 +320,101 @@ const moodle = function (prn, password, req, res1, user) {
   });
 };
 
+app.post('/add_extra_student', function(req, res){
+  Class.findOne({name : req.body.class_name}, function(err, docs){
+    var userDetails = new Student_data({
+      rollno: req.body.extra_roll_number,
+      class_id: docs._id,
+      _id: new ObjectID(),
+    });
+    userDetails.save((err, doc) => {
+      if (!err) {
+          res.status(200).end();
+      }
+      else {
+        res.status(400).end();
+        console.log(err);
+      }
+    });
+  });
+});
+
+app.post("/add_new_class", function(req, res) {
+  Class.findOne({ name: req.body.class_name }, function (err, docs) {
+      if (err != null) {
+        console.log(`Error occured ${err}`);
+      } else if (docs != null) {
+        console.log(docs);
+        classId = docs._id;
+        var studentList = [];
+        for (x = req.body.starting_roll_number; x <= req.body.ending_roll_number; x++) {
+          const data = new Student_data({
+            rollno: x,
+            class_id: classId,
+          });
+          studentList.push(data);
+        }
+        Student_data
+          .insertMany(studentList, function (err, res1) {
+            if (err) {
+              console.log(err);
+              res.status(400).end();
+            } else if (res1 != null) {
+              console.log(res.insertedCount);
+              res.status(200).end();
+            } else {
+              console.log("not inserted");
+              res.status(400).end();
+            }
+          });
+      } else {
+        console.log(`not Found ${docs}`);
+        res.status(400).end();
+      }
+    });
+  });
+
+app.get("/test_details", function(req, res){
+  if (req.isAuthenticated()) {
+    Question.find({}, function(err, docs){
+      if(err!=null) {
+        console.log(err);
+        res.render("test_details", {data : null});
+      } else if(docs!=null && docs.length != 0) {
+        console.log(docs);
+        res.render("test_details", {data : docs});
+      } else {
+        res.render("test_details", {data : null});
+      }
+    });
+  } else {
+    res.redirect("/loginT");
+  }
+});
+
+app.get('/add_question', function(req, res) {
+  if(req.isAuthenticated()) {
+  res.render('add_question');
+    } else res.render('/loginT');
+});
+
+app.post('/add_question', function(req, res){
+  const question = new Question({
+    title: req.body.question,
+    correctAns:req.body.correct_answer,
+    score: req.body.score,
+    _id: new ObjectID()
+  });
+  question.save((err, doc) => {
+    if (!err) {
+        res.status(200).end();
+    }
+    else {
+      res.status(400).end();
+      console.log(err);
+    }
+  });
+});
 
 app.listen(3000, function () {
   console.log("Server started on port 3000");

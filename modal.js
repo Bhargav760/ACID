@@ -6,8 +6,8 @@ const passportLocalMongoose = require("passport-local-mongoose");
 const userSchema = new mongoose.Schema(
   {
     _id: {},
-    name: String,
-    password: String,
+    name: {},
+    password: {},
   },
   {
     timestamps: true,
@@ -31,18 +31,18 @@ const userDataSchema = new mongoose.Schema(
 
 const students = new mongoose.Schema({
   _id: {},
-  test_id: { Number },
-  rollno: { Number },
-  password: { String },
-  score: { Number },
-  status: { Boolean },
+  test_id: {  },
+  rollno: {  },
+  password: {  },
+  score: {  },
+  status: {  },
 });
 
 const teacherSchema = new mongoose.Schema(
   {
     _id: {},
-    username: { String },
-    password: { String },
+    username: {  },
+    password: {  },
     verified: false,
   },
   {
@@ -58,24 +58,24 @@ const classesSchema = new mongoose.Schema({
 const testsSchema = new mongoose.Schema({
   //_id: {},
   teacher_id: {},
-  name: {},
+  name: {  },
   date: { type: Date, default: Date.now },
-  subject: {},
-  total_questions: {},
-  // class_id: { Number },
+  status_id: {  },
+  subject: {  },
+  total_questions: {  },
+  class_id: {  },
 });
 
 const status = new mongoose.Schema({
   _id: {},
-  name: { String },
+  name: {  },
 });
 
 const questionsSchema = new mongoose.Schema({
   _id: {},
-  title: { String },
-  oneWord: { Boolean },
-  correctAns: { String },
-  score: { Number },
+  title: {},
+  correctAns: {},
+  score: {},
 });
 
 const question_test_mapping = new mongoose.Schema({
@@ -87,8 +87,14 @@ const score = new mongoose.Schema({
   _id: {},
   test_id: {},
   question_id: {},
-  correct_count: { Number },
-  wrong_count: { Number },
+  correct_count: {  },
+  wrong_count: {  },
+});
+
+const student_data = new mongoose.Schema({
+  _id: {},
+  rollno: {},
+  class_id: {},
 });
 
 userSchema.plugin(passportLocalMongoose);
@@ -105,6 +111,7 @@ const Status = mongoose.model("status", status);
 const QTM = mongoose.model("question_test_mapping", question_test_mapping);
 const Question = mongoose.model("question", questionsSchema);
 const Score = mongoose.model("score", score);
+const Student_data = mongoose.model("student_data", student_data);
 
 // Exporting our model objects
 module.exports = {
@@ -118,4 +125,5 @@ module.exports = {
   Question,
   QTM,
   Score,
+  Student_data
 };
