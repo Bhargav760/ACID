@@ -1,47 +1,35 @@
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8" />
 
-    <link rel="icon" type="image/png" href="assets/css/img/favicon.png" />
-    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
-    <meta name="robots" content="noindex" />
-    <meta http-equiv="pragma" content="no-cache" />
-    <meta http-equiv="expires" content="-1" />
-    <title>HomePage</title>
-    <meta
-      content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
-      name="viewport"
-    />
-    <!--     Fonts and icons     -->
-    <link
-      href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200"
-      rel="stylesheet"
-    />
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"
-    />
-    <!-- CSS Files -->
-    <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
-    <link href="assets/css/now-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
-    <link href="assets/css/main.css" rel="stylesheet" />
-  </head>
+<head>
+  <meta charset="utf-8" />
 
-  <body class="">
-    <div class="wrapper">
-      <!-- sidebar -->
-      <%- include('slidebar') %>
+  <link rel="icon" type="image/png" href="assets/css/img/favicon.png" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="robots" content="noindex" />
+  <meta http-equiv="pragma" content="no-cache" />
+  <meta http-equiv="expires" content="-1" />
+  <title>HomePage</title>
+  <meta content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=0, shrink-to-fit=no"
+    name="viewport" />
+  <!--     Fonts and icons     -->
+  <link href="https://fonts.googleapis.com/css?family=Montserrat:400,700,200" rel="stylesheet" />
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" />
+  <!-- CSS Files -->
+  <link href="assets/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="assets/css/now-ui-dashboard.css?v=1.1.0" rel="stylesheet" />
+  <link href="assets/css/main.css" rel="stylesheet" />
+</head>
+
+<body class="">
+  <div class="wrapper">
+    <!-- sidebar -->
+    <%- include('slidebar') %>
       <div class="main-panel">
         <!-- Navbar -->
-        <nav
-          class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-primary fixed-top"
-        >
+        <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-primary fixed-top">
           <div class="container-fluid">
             <div class="navbar-wrapper">
               <div class="navbar-toggle">
@@ -53,15 +41,8 @@
               </div>
               <a class="navbar-brand" href="#pablo">Dashboard Basic Settings</a>
             </div>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navigation"
-              aria-controls="navigation-index"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
+            <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+              aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
               <span class="navbar-toggler-bar navbar-kebab"></span>
               <span class="navbar-toggler-bar navbar-kebab"></span>
               <span class="navbar-toggler-bar navbar-kebab"></span>
@@ -81,15 +62,11 @@
                       <h5 class="title">Pending Oral Tests</h5>
                     </div>
                     <div class="col-md-4">
-                      <button
-                        class="btn btn-primary btn-block btn-round"
-                        onclick="redirect_to_new_test()"
-                        style="
+                      <button class="btn btn-primary btn-block btn-round" onclick="redirect_to_new_test()" style="
                           margin-top: 0px;
                           width: 100px !important;
                           float: right !important;
-                        "
-                      >
+                        ">
                         NEW
                       </button>
                     </div>

@@ -56,7 +56,7 @@ const classesSchema = new mongoose.Schema({
 });
 
 const testsSchema = new mongoose.Schema({
-  _id: {},
+  //_id: {},
   teacher_id: {},
   name: {  },
   date: { type: Date, default: Date.now },

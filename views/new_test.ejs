@@ -85,67 +85,69 @@
                   <form method="POST" action="/create_Test">
                     <input type="hidden" name="new_test" />
                     <div class="row">
-                      <div class="col-md-12">
-                        <div class="form-group">
-                          <label>Test name (title)</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="test_name"
-                            placeholder="Test name"
-                            required
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label>Subject name</label>
-                          <input
-                            type="text"
-                            class="form-control"
-                            name="subject_name"
-                            placeholder="Subject name"
-                            required
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label>Test date</label>
-                          <input
-                            type="date"
-                            class="form-control"
-                            name="test_date"
-                            placeholder="Test Date"
-                            required
-                          />
-                        </div>
-                        <div class="form-group">
-                          <label>Total Questions count</label>
-                          <input
-                            type="number"
-                            class="form-control"
-                            name="total_questions"
-                            placeholder="Total Questions count"
-                            required
-                          />
-                        </div>
-                        <div class="form-group">
-                          <div class="row">
-                            <div class="col-md-6">
-                              <select
-                                id="options"
-                                name="test_class"
-                                class="btn-round"
-                                required
-                                style="width: 100%"
-                              >
-                                <option
-                                  selected="true"
-                                  value=""
-                                  disabled="disabled"
-                                >
-                                  Select class for test
-                                </option>
+                        <div class="col-md-2"></div>
+                        <div class="col-md-8">
+                            <div class="card">
+                                <div class="card-header">
+                                    <h5 class="title">Create New Test</h5>
+                                </div>
+                                <div class="card-body">
+                                    <form method="post" action="/create_test">
 
-                                <option value=""></option>
-                              </select>
+                                        <div class="row">
+                                            <div class="col-md-12">
+                                                <div class="form-group">
+                                                    <label>Test name (title)</label>
+                                                    <input type="text" class="form-control" name="test_name"
+                                                        placeholder="Test name" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Subject name</label>
+                                                    <input type="text" class="form-control" name="subject_name"
+                                                        placeholder="Subject name" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Test date</label>
+                                                    <input type="date" class="form-control" name="test_date"
+                                                        placeholder="Test Date" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <label>Total Questions count</label>
+                                                    <input type="number" class="form-control" name="total_questions"
+                                                        placeholder="Total Questions count" required />
+                                                </div>
+                                                <div class="form-group">
+                                                    <div class="row">
+
+
+                                                        <div class="col-md-6">
+                                                            <select id="options" name="test_class" class="btn-round"
+                                                                required style="width:100%;">
+                                                                <option selected="true" value="" disabled="disabled">
+                                                                    Select class for test</option>
+
+
+                                                                <option value="">
+                                                                    1
+                                                                </option>
+
+
+                                                            </select>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="row center-element">
+                                            <div class="col-md-8">
+                                                <div class="form-group">
+                                                    <button class="btn btn-primary btn-block btn-round">CREATE
+                                                        TEST</button>
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </form>
+                                </div>
                             </div>
                           </div>
                         </div>

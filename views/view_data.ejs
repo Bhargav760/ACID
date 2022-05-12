@@ -38,76 +38,89 @@
 
   <body class="">
     <div class="wrapper">
-      <!-- sidebar -->
-      <%- include('slidebar') %>
-      <div class="main-panel">
-        <!-- Navbar -->
-        <nav
-          class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-primary fixed-top"
-        >
-          <div class="container-fluid">
-            <div class="navbar-wrapper">
-              <div class="navbar-toggle">
-                <button type="button" class="navbar-toggler">
-                  <span class="navbar-toggler-bar bar1"></span>
-                  <span class="navbar-toggler-bar bar2"></span>
-                  <span class="navbar-toggler-bar bar3"></span>
-                </button>
-              </div>
-              <a class="navbar-brand" href="#pablo">View Data</a>
-            </div>
-            <button
-              class="navbar-toggler"
-              type="button"
-              data-toggle="collapse"
-              data-target="#navigation"
-              aria-controls="navigation-index"
-              aria-expanded="false"
-              aria-label="Toggle navigation"
-            >
-              <span class="navbar-toggler-bar navbar-kebab"></span>
-              <span class="navbar-toggler-bar navbar-kebab"></span>
-              <span class="navbar-toggler-bar navbar-kebab"></span>
-            </button>
-            <%- include('navitem') %>
-          </div>
-        </nav>
-        <div class="panel-header panel-header-sm"></div>
-        <div class="content" style="min-height: auto">
-          <div class="row">
-            <div class="col-md-12">
-              <div class="card" style="min-height: 400px">
-                <div class="card-header">
-                  <div class="row">
-                    <div class="col-md-8">
-                      <h5 class="title">All Class and Students Data</h5>
+
+        <%- include('slidebar') %>
+            <div class="main-panel">
+                <!-- Navbar -->
+                <nav class="navbar navbar-expand-lg navbar-transparent navbar-absolute bg-primary fixed-top">
+                    <div class="container-fluid">
+                        <div class="navbar-wrapper">
+                            <div class="navbar-toggle">
+                                <button type="button" class="navbar-toggler">
+                                    <span class="navbar-toggler-bar bar1"></span>
+                                    <span class="navbar-toggler-bar bar2"></span>
+                                    <span class="navbar-toggler-bar bar3"></span>
+                                </button>
+                            </div>
+                            <a class="navbar-brand" href="#pablo">View Data</a>
+                        </div>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navigation"
+                            aria-controls="navigation-index" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-bar navbar-kebab"></span>
+                            <span class="navbar-toggler-bar navbar-kebab"></span>
+                            <span class="navbar-toggler-bar navbar-kebab"></span>
+                        </button>
+
                     </div>
-                    <div class="col-md-2">
-                      <select
-                        id="options"
-                        name="options"
-                        class="btn-round"
-                        required
-                        style="width: 100%"
-                      >
-                        <option
-                          id=""
-                          selected="true"
-                          value=""
-                          disabled="disabled"
-                        >
-                          Select class
-                        </option>
-                      </select>
-                    </div>
-                    <div class="col-md-2">
-                      <button
-                        onclick="populateTable()"
-                        class="btn btn-primary btn-block btn-round"
-                        style="margin-top:0px;width:100px !important; float:right !important; onclick='getStudentsFromClass()'"
-                      >
-                        FIND
-                      </button>
+                </nav>
+
+                <div class="panel-header panel-header-sm"></div>
+                <div class="content" style="min-height: auto">
+                    <div class="row">
+                        <div class="col-md-12">
+                            <div class="card" style="min-height: 400px">
+                                <div class="card-header">
+                                    <div class="row">
+                                        <div class="col-md-8">
+                                            <h5 class="title">All Class and Students Data</h5>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <select id="options" name="options" class="btn-round" required
+                                                style="width: 100%">
+                                                <option id="" selected="true" value="" disabled="disabled">
+                                                    Select class
+                                                </option>
+                                            </select>
+                                        </div>
+                                        <div class="col-md-2">
+                                            <button onclick="populateTable()"
+                                                class="btn btn-primary btn-block btn-round"
+                                                style="margin-top:0px;width:100px !important;float:right !important;"  onclick='getStudentsFromClass()'>
+                                                FIND
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="card-body">
+
+                                    <input type="hidden" name="general_settings" />
+
+
+                                    <table id="roll_numbers_table">
+                                        <thead>
+
+                                            <tr>
+                                                <th data-field="id">prn</th>
+                                                <th data-field="rollno">Name</th>
+                                            </tr>
+                                        </thead>
+                                        <tbody>
+                                            <%user.forEach(function(character){%>
+                                                <tr>
+                                                    <td>
+                                                        <%=character.prn%>
+                                                    </td>
+                                                    <td>
+                                                        <%=character.name%>
+                                                    </td>
+                                                </tr>
+                                                <%})%>
+                                        </tbody>
+                                    </table>
+                                    <!-- </form> -->
+                                </div>
+                            </div>
+                        </div>
                     </div>
                   </div>
                 </div>
@@ -130,8 +143,10 @@
         <%- include('footer') %>
       </div>
     </div>
-  </body>
-  <script>
+
+
+</body>
+<script>
     var total_count;
     $(document).ready(function () {
       $.ajax({

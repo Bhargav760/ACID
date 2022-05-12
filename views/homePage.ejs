@@ -65,16 +65,17 @@
                             <div class="card" style="padding-bottom: 20px;">
                                 <div class="container">
                                     <div class="row">
+                                        <%nt.forEach(function(character){%>
                                         <div class="col-md-12" id="row" style="display:none;">
                                                 <div class="card" style="background: #ededed;margin:20px 10px 0px 10px;">
                                                     <div class="card-body">
                                                         <div class="container">
                                                             <div class="row">
                                                                 <div class="col-md-8">
-                                                                        <p id="test_name"></p>
+                                                                        <p id=""><%=character.name%></p>
                                                                 </div>
                                                                 <div class="col-md-4">
-                                                                        <a location.href = "quiz"><button type="button" class="btn btn-success" style="float:right;">Start Test</button></a>
+                                                                        <!-- <a location.href = "quiz"><button type="button" class="btn btn-success" style="float:right;">Start Test</button></a> -->
                                                                 </div>
                                                             </div>
                                                             
@@ -82,6 +83,7 @@
                                                     </div>
                                                 </div>
                                         </div>
+                                        <%})%>
                                     </div>
                                 </div>
                             </div>
@@ -134,7 +136,20 @@
 
 
       
+//         <?php
+//     session_start();
+    
+//     if($_SESSION['test_ongoing']  == "true"){
+//         echo "Test Ongoing";
+//         header("Location: quiz.php");
+//     }else if(!isset($_SESSION['student_details'])){
+//         echo "You are not logged in";
+//         header("Location: ../index.php");
+//     }
 
+//     function createCard(array $row) { ?>
+  
+// <?php } ?>
 
     </script>    
 </body>
