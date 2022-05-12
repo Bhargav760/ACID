@@ -399,8 +399,9 @@ app.get('/add_question', function(req, res) {
 });
 
 app.post('/add_question', function(req, res){
+  console.log(req.body);
   const question = new Question({
-    title: req.body.question,
+    title: req.body.title,
     correctAns:req.body.correct_answer,
     score: req.body.score,
     _id: new ObjectID()
