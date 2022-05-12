@@ -174,17 +174,23 @@ app.post("/create_test", function (req, res) {
   res.redirect("/homePageTeacher");
 
 });
-app.get("/homePage", function (req, res) {
+app.get("/Student", function (req, res) {
+  sess = req.session;
+  console.log(sess.uid);
+  Test.find({ teacher_id: sess.uid }, function (err, docs) {
+    //console.log(docs);
+    if (err != null) {
+      console.log(`Error occured ${err}`);
 
-  // fun1 = async () => {
-  //   var a = await Test.find({});
-  //   console.log(a);
-  //   res.render("homePage", {
-  //     nt: a,
-  //   })
-  // }
-  // fun1();
-  res.render("homePage");
+    } else if (docs != null && docs.length != 0) {
+      console.log(docs);
+      res.render("Student", { data: docs });
+    } else {
+      console.log(`not Found ${docs}`);
+      res.render("Student", { data: null });
+    }
+
+  })
 })
 
 app.post("/get_dashboard_contents", function (req, res) {});
@@ -279,7 +285,7 @@ const moodle = function (prn, password, req, res1, user) {
                 console.log(err);
               } else {
                 passport.authenticate("userlocal")(req, res, function () {
-
+                  res.redirect("/homePage");
                 });
               }
             });
